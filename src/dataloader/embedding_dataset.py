@@ -3,6 +3,18 @@ import numpy as np
 import torch
 
 
+def sequential_split(X: np.ndarray,y: np.ndarray, 
+                     train_ratio: float = 0.7,  val_ratio: float = 0.15,):
+    n = len(X)
+    n_train = int(n * train_ratio)
+    n_val = int(n * val_ratio)
+
+    X_train, y_train = X[:n_train], y[:n_train]
+    X_val, y_val = X[n_train:n_train + n_val], y[n_train:n_train + n_val]
+    X_test, y_test = X[n_train + n_val:], y[n_train + n_val:]
+
+    return X_train, y_train, X_val, y_val, X_test, y_test
+
 
 class DelayEmbeddingDataset(Dataset):
     """
@@ -37,3 +49,7 @@ class DelayEmbeddingDataset(Dataset):
         x = torch.tensor(x, dtype=torch.float32)
         y = torch.tensor(y, dtype=torch.float32)
         return(x,y)
+    
+    def build_delay_dataset(self):
+        return (self.inputs,self.target)
+        

@@ -67,6 +67,6 @@ def train_model(model:nn.Module,train_loader:DataLoader,val_loader:DataLoader,
     plt.plot(val_losse, label="Validation Loss")
     plt.xlabel("Epoch")
     plt.ylabel("MSE Loss")
-    plt.title("Train and Validation Loss")
+    plt.title("Train and Validation Loss ESN")
     plt.legend()
     plt.grid(True)
